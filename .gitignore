@@ -21,7 +21,6 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-<<<<<<< HEAD
+
 node_modules
-=======
->>>>>>> 9b938e721b263ac8122892912288ab02faf2869c
+
