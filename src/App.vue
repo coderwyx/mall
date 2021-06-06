@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import MainTabBar from 'components/content/mainTabBar/MainTabBar';
+  import MainTabBar from 'components/content/maintabbar/MainTabBar';
   
 
 export default {
@@ -23,5 +23,5 @@ export default {
 </script>
 
 <style>
-
+ 
 </style>
