@@ -15,5 +15,5 @@ new Vue({
   render: h => h(App)
 }).$mount('#app')
 
-.use(store).use(router).mount('#app')
+
 

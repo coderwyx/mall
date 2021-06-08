@@ -18,12 +18,14 @@ export function request(config) {
   })
 
   // 2.2响应拦截
-  instance.interceptors.response.use(res= {
+  instance.interceptors.response.use(res=> {
     return res.data
   },err=> {
 
   })
 
+
+  //3.发送请求
   return instance(config)
  
 }
