@@ -20,7 +20,7 @@
     name: "HomeSwiper",
     data() {
       return {
-        banner: null
+        
       }
     },
     props: {
@@ -32,9 +32,7 @@
       }
     },
     methods: {},
-    created() {
-    
-    }
+   
   }
 </script>
 
