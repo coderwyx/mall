@@ -36,13 +36,14 @@
   }
 </script>
 
-<style>
+<style >
 .my-swipe .van-swipe-item {
     color: #fff;
     font-size: 20px;
     line-height: 150px;
     text-align: center;
     background-color: #39a9ed;
+    
   }
   .my-swipe .van-swipe-item img {
     width: 100%;
