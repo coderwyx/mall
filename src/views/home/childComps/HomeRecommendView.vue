@@ -34,14 +34,16 @@ export default {
   font-size: 14px;
   padding: 10px 0;
   border-bottom: 8px solid #eee;
-  img {
-    height: 80px;
-    width: 80px;
-    margin: 5px 0;
+  .recommend-item {
+    flex-grow: 1;
+    img {
+      height: 80px;
+      width: 80px;
+      margin: 5px 0;
+    }
+    div {
+      color: #000;
+    }
   }
 }
-.recommend-item {
-  flex-grow: 1;
-}
-
 </style>
