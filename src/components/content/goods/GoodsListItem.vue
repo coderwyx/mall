@@ -4,7 +4,7 @@
     <div class="goodsInfo">
       <p>{{ goods.title }}</p>
       <span class="price">{{ goods.price }}</span>
-      <span class="cfav">☆{{ goods.cfav }}</span>
+      <span class="cfav">★{{ goods.cfav }}</span>
     </div>
   </div>
 </template>
@@ -32,11 +32,14 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
+   img {
+      width: 100%;
+      border-radius: 5px;
+    }
   .goodsInfo {
     height: 60px;
-    img {
-      width: 100%;
-    }
+
+   
     p {
       word-break: keep-all;
       white-space: nowrap;

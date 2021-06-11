@@ -5,23 +5,37 @@
       <div slot="center">购物街</div>
     </nav-bar>
 
-    <!-- 轮播图组件 -->
-    <home-swiper :banner="banner"></home-swiper>
+    <!-- 滑动效果组件 -->
+    <scroll>
 
-    <!-- 推荐组件 -->
-    <home-recommend-view :recommend="recommend"></home-recommend-view>
+      <!-- 解决better-scroll问题 -->
+      <div class="test" style="height: 42px"></div>
 
-    <!-- 本周流行组件 -->
-    <home-feature-view></home-feature-view>
+      <!-- 轮播图组件 -->
+      <home-swiper :banner="banner"></home-swiper>
 
-    <!-- tabcontrol组件 -->
-    <tab-control :titles="['流行', '新款', '精选']"></tab-control>
+      <!-- 推荐组件 -->
+      <home-recommend-view :recommend="recommend"></home-recommend-view>
 
-    <!-- 商品列表组件 -->
-    <goods-list :goodsList="goods.pop.list" class="goods-list"></goods-list>
+      <!-- 本周流行组件 -->
+      <home-feature-view></home-feature-view>
 
+      <!-- tabcontrol组件 -->
+      <tab-control
+        :titles="['流行', '新款', '精选']"
+        @tabClick="tabClick"
+      ></tab-control>
+
+      <!-- 商品列表组件 -->
+      <goods-list
+        :goodsList="goods[TabControl].list"
+        class="goods-list"
+      ></goods-list>
+    
     <!-- 底部一些信息给tabbar挡住了，这个是把隐藏的内容顶出来的 -->
-    <div class="test" style="height:49px"></div>
+    <div class="test" style="height: 49px"></div>
+    
+    </scroll>
   </div>
 </template>
 
@@ -33,6 +47,7 @@ import HomeFeatureView from "./childComps/HomeFeatureView";
 import navBar from "components/common/navbar/navBar";
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
+import Scroll from "components/common/scroll/Scroll";
 
 import { getHomeMulitidata, getHomeGoods } from "network/home";
 
@@ -42,6 +57,7 @@ export default {
     return {
       banner: null,
       recommend: null,
+      TabControl: "pop",
       goods: {
         pop: { page: 0, list: [] },
         new: { page: 0, list: [] },
@@ -51,6 +67,26 @@ export default {
   },
 
   methods: {
+    // 事件监听相关方法
+    tabClick(index) {
+      // console.log(index);
+      switch (index) {
+        case 0:
+          this.TabControl = "pop";
+
+          break;
+        case 1:
+          this.TabControl = "new";
+
+          break;
+        case 2:
+          this.TabControl = "sell";
+
+          break;
+      }
+    },
+
+    // 网络请求相关方法
     getHomeMulitidata() {
       getHomeMulitidata()
         .then((res) => {
@@ -83,6 +119,7 @@ export default {
     navBar,
     TabControl,
     GoodsList,
+    Scroll,
   },
   created() {
     // 获取轮播图推荐等数据
@@ -104,6 +141,5 @@ export default {
     top: -1px;
     z-index: 100;
   }
- 
 }
 </style>
