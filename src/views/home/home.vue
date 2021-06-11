@@ -6,10 +6,7 @@
     </nav-bar>
 
     <!-- 滑动效果组件 -->
-    <scroll>
-
-      <!-- 解决better-scroll问题 -->
-      <div class="test" style="height: 42px"></div>
+    <scroll class="scroll">
 
       <!-- 轮播图组件 -->
       <home-swiper :banner="banner"></home-swiper>
@@ -31,10 +28,7 @@
         :goodsList="goods[TabControl].list"
         class="goods-list"
       ></goods-list>
-    
-    <!-- 底部一些信息给tabbar挡住了，这个是把隐藏的内容顶出来的 -->
-    <div class="test" style="height: 49px"></div>
-    
+
     </scroll>
   </div>
 </template>
@@ -135,11 +129,22 @@ export default {
 
 <style lang="less">
 #home {
+  position: relative;
+  height: 100vh;
   .home-nav {
     background-color: #ff8198;
     position: sticky;
     top: -1px;
     z-index: 100;
+  }
+  .scroll {
+    position: absolute;
+    top: 44px;
+    bottom: 49px;
+    left: 0;
+    right: 0;
+
+    overflow: hidden;
   }
 }
 </style>
