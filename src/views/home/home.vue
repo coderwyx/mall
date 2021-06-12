@@ -5,9 +5,11 @@
       <div slot="center">购物街</div>
     </nav-bar>
 
-    <!-- 滑动效果组件 -->
-    <scroll class="scroll">
+    <!-- 返回顶部组件 -->
+    <back-top @click.native="backClick" class="back-top" v-show="showBackTop"></back-top>
 
+    <!-- 滑动效果组件 -->
+    <scroll class="scroll" ref="scroll" :probe-type="3" @scroll="contentScroll" @pullingUp="loadMore" :pullUpLoad='true'>
       <!-- 轮播图组件 -->
       <home-swiper :banner="banner"></home-swiper>
 
@@ -28,7 +30,6 @@
         :goodsList="goods[TabControl].list"
         class="goods-list"
       ></goods-list>
-
     </scroll>
   </div>
 </template>
@@ -42,6 +43,7 @@ import navBar from "components/common/navbar/navBar";
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
+import BackTop from "components/content/backtop/BackTop";
 
 import { getHomeMulitidata, getHomeGoods } from "network/home";
 
@@ -57,6 +59,7 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
+      showBackTop:false
     };
   },
 
@@ -79,7 +82,17 @@ export default {
           break;
       }
     },
-
+    backClick(){
+      this.$refs.scroll.scrollTo(0,0);
+      
+    },
+    contentScroll(position){
+      this.showBackTop = position.y < -1000; 
+    },
+    loadMore(){
+    this.getHomeGoods(this.TabControl) 
+     
+    },
     // 网络请求相关方法
     getHomeMulitidata() {
       getHomeMulitidata()
@@ -87,6 +100,7 @@ export default {
           // console.log(res.data.recommend.list);
           this.banner = res.data.banner.list;
           this.recommend = res.data.recommend.list;
+          this.$refs.scroll.scroll.refresh() 
         })
         .catch((err) => {
           console.log(err);
@@ -97,14 +111,17 @@ export default {
       const page = this.goods[type].page + 1;
       getHomeGoods(type, page)
         .then((res) => {
-          console.log(res);
           this.goods[type].list.push(...res.data.list);
           this.goods[type].page += 1;
+          this.$refs.scroll.finishPullUp();
         })
         .catch((err) => {
           console.log(err);
         });
     },
+
+    // 其他方法
+    
   },
   components: {
     HomeSwiper,
@@ -114,6 +131,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
+    BackTop,
   },
   created() {
     // 获取轮播图推荐等数据
@@ -146,5 +164,8 @@ export default {
 
     overflow: hidden;
   }
+  // .back-top {
+  //   display: none;
+  // }
 }
 </style>
