@@ -28,6 +28,7 @@ export default {
   components: {
     GoodsListItem,
   },
+ 
 };
 </script>
 

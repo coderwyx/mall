@@ -5,13 +5,35 @@
       <div slot="center">购物街</div>
     </nav-bar>
 
+    <tab-control
+      :titles="['流行', '新款', '精选']"
+      @tabClick="tabClick"
+      ref="TabControl-2"
+      v-show="showTabControl"
+      class="showTabControl"
+    ></tab-control>
+
     <!-- 返回顶部组件 -->
-    <back-top @click.native="backClick" class="back-top" v-show="showBackTop"></back-top>
+    <back-top
+      @click.native="backClick"
+      class="back-top"
+      v-show="showBackTop"
+    ></back-top>
 
     <!-- 滑动效果组件 -->
-    <scroll class="scroll" ref="scroll" :probe-type="3" @scroll="contentScroll" @pullingUp="loadMore" :pullUpLoad='true'>
+    <scroll
+      class="scroll"
+      ref="scroll"
+      :probe-type="3"
+      @scroll="contentScroll"
+      @pullingUp="loadMore"
+      :pullUpLoad="true"
+    >
       <!-- 轮播图组件 -->
-      <home-swiper :banner="banner"></home-swiper>
+      <home-swiper
+        :banner="banner"
+        @swipeItemLoad="swipeItemLoad"
+      ></home-swiper>
 
       <!-- 推荐组件 -->
       <home-recommend-view :recommend="recommend"></home-recommend-view>
@@ -23,6 +45,7 @@
       <tab-control
         :titles="['流行', '新款', '精选']"
         @tabClick="tabClick"
+        ref="TabControl-1"
       ></tab-control>
 
       <!-- 商品列表组件 -->
@@ -59,7 +82,12 @@ export default {
         new: { page: 0, list: [] },
         sell: { page: 0, list: [] },
       },
-      showBackTop:false
+      showBackTop: false,
+      tabOffsetTop: 0,
+      showTabControl: false,
+      popY: 0,
+      newY: 0,
+      sellY: 0,
     };
   },
 
@@ -69,29 +97,97 @@ export default {
       // console.log(index);
       switch (index) {
         case 0:
+          // 判断当前是从哪个模块跳转的
+          switch (this.TabControl) {
+            case "new":
+              // 把对应数据保存到相应的模块中
+              if (-this.$refs.scroll.scroll.y < this.tabOffsetTop) {
+                this.newY = -this.tabOffsetTop;
+              } else {
+                this.newY = this.$refs.scroll.scroll.y;
+              }
+              break;
+            case "sell":
+              if (-this.$refs.scroll.scroll.y < this.tabOffsetTop) {
+                this.sellY = -this.tabOffsetTop;
+              } else {
+                this.sellY = this.$refs.scroll.scroll.y;
+              }
+              break;
+          }
+
           this.TabControl = "pop";
+          this.$refs.scroll.scrollTo(0, this.popY, 0);
 
           break;
         case 1:
+          switch (this.TabControl) {
+            case "pop":
+              if (-this.$refs.scroll.scroll.y < this.tabOffsetTop) {
+                this.popY = -this.tabOffsetTop;
+              } else {
+                this.popY = this.$refs.scroll.scroll.y;
+              }
+              break;
+            case "sell":
+              if (-this.$refs.scroll.scroll.y < this.tabOffsetTop) {
+                this.sellY = -this.tabOffsetTop;
+              } else {
+                this.sellY = this.$refs.scroll.scroll.y;
+              }
+              break;
+          }
           this.TabControl = "new";
+
+          this.$refs.scroll.scrollTo(0, this.newY, 0);
 
           break;
         case 2:
+          switch (this.TabControl) {
+            case "pop":
+              if (-this.$refs.scroll.scroll.y < this.tabOffsetTop) {
+                this.popY = -this.tabOffsetTop;
+              } else {
+                this.popY = this.$refs.scroll.scroll.y;
+              }
+              break;
+            case "new":
+              if (-this.$refs.scroll.scroll.y < this.tabOffsetTop) {
+                this.newY = -this.tabOffsetTop;
+              } else {
+                this.newY = this.$refs.scroll.scroll.y;
+              }
+              break;
+          }
           this.TabControl = "sell";
+
+          this.$refs.scroll.scrollTo(0, this.sellY, 0);
 
           break;
       }
+      this.$refs["TabControl-2"].currentIndex = index;
+      this.$refs["TabControl-1"].currentIndex = index;
     },
-    backClick(){
-      this.$refs.scroll.scrollTo(0,0);
-      
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0);
     },
-    contentScroll(position){
-      this.showBackTop = position.y < -1000; 
+    contentScroll(position) {
+      // 监听是否显示backTop
+      this.showBackTop = position.y < -1000;
+
+      // 监听是否显示TabControl
+      this.showTabControl = position.y < -this.tabOffsetTop;
+
+      console.log(position.y);
     },
-    loadMore(){
-    this.getHomeGoods(this.TabControl) 
-     
+    loadMore() {
+      this.getHomeGoods(this.TabControl);
+    },
+    swipeItemLoad() {
+      this.tabOffsetTop = this.$refs["TabControl-1"].$el.offsetTop;
+      this.popY = -this.tabOffsetTop;
+      this.newY = -this.tabOffsetTop;
+      this.sellY = -this.tabOffsetTop;
     },
     // 网络请求相关方法
     getHomeMulitidata() {
@@ -100,7 +196,7 @@ export default {
           // console.log(res.data.recommend.list);
           this.banner = res.data.banner.list;
           this.recommend = res.data.recommend.list;
-          this.$refs.scroll.scroll.refresh() 
+          this.$refs.scroll.scroll.refresh();
         })
         .catch((err) => {
           console.log(err);
@@ -121,7 +217,6 @@ export default {
     },
 
     // 其他方法
-    
   },
   components: {
     HomeSwiper,
@@ -141,6 +236,16 @@ export default {
     this.getHomeGoods("pop");
     this.getHomeGoods("new");
     this.getHomeGoods("sell");
+  },
+  mounted() {},
+  destroyed() {
+    console.log("destroyed");
+  },
+  activated() {
+    console.log("active");
+  },
+  deactivated() {
+    console.log("deactive");
   },
 };
 </script>
@@ -164,8 +269,9 @@ export default {
 
     overflow: hidden;
   }
-  // .back-top {
-  //   display: none;
-  // }
+  .showTabControl {
+    position: relative;
+    z-index: 100;
+  }
 }
 </style>

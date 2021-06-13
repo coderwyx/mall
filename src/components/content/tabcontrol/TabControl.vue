@@ -35,8 +35,7 @@ export default {
 .tab-control {
   display: flex;
   background-color: #fff;
-  position: sticky;
-  top: 42px;
+
     div {
       flex-grow: 1;
       text-align: center;
