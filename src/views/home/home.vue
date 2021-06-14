@@ -62,7 +62,7 @@ import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
 import HomeFeatureView from "./childComps/HomeFeatureView";
 
-import navBar from "components/common/navbar/navBar";
+import NavBar from "components/common/navbar/NavBar";
 import TabControl from "components/content/tabcontrol/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
@@ -178,7 +178,7 @@ export default {
       // 监听是否显示TabControl
       this.showTabControl = position.y < -this.tabOffsetTop;
 
-      console.log(position.y);
+      // console.log(position.y);
     },
     loadMore() {
       this.getHomeGoods(this.TabControl);
@@ -222,7 +222,7 @@ export default {
     HomeSwiper,
     HomeRecommendView,
     HomeFeatureView,
-    navBar,
+    NavBar,
     TabControl,
     GoodsList,
     Scroll,
