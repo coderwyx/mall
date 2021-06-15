@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="detail">
     <detail-nav-bar></detail-nav-bar>
     <detail-swiper :topImages="topImages"></detail-swiper>
     <detail-base-info :baseInfo="goods"></detail-base-info>
+    <detail-shop-info :shopInfo="shop"></detail-shop-info>
   </div>
 </template>
 
@@ -10,8 +11,9 @@
 import DetailNavBar from "./childComps/DetailNavBar";
 import DetailSwiper from "./childComps/DetailSwiper";
 import DetailBaseInfo from "./childComps/DetailBaseInfo";
+import DetailShopInfo from "./childComps/DetailShopInfo";
 
-import { getDetail, Goods } from "network/detail";
+import { getDetail, Goods, Shop } from "network/detail";
 
 export default {
   name: "Detail",
@@ -20,6 +22,7 @@ export default {
       iid: "",
       topImages: null,
       goods: {},
+      shop: {},
     };
   },
   methods: {},
@@ -29,12 +32,16 @@ export default {
       .then((res) => {
         console.log(res);
         const data = res.result;
+        //获取详情页轮播图数据
+        this.topImages = data.itemInfo.topImages;
+        // 获取商品数据
         this.goods = new Goods(
           data.itemInfo,
           data.columns,
           data.shopInfo.services
         );
-        this.topImages = data.itemInfo.topImages;
+        // 获取店铺数据
+        this.shop = new Shop(data.shopInfo);
       })
       .catch((err) => {
         console.log(err);
@@ -44,9 +51,13 @@ export default {
     DetailNavBar,
     DetailSwiper,
     DetailBaseInfo,
+    DetailShopInfo,
   },
 };
 </script>
 
 <style lang="less" scoped>
+.detail {
+  height: 2000px;
+}
 </style>

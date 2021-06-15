@@ -238,15 +238,7 @@ export default {
     this.getHomeGoods("sell");
   },
   mounted() {},
-  destroyed() {
-    console.log("destroyed");
-  },
-  activated() {
-    console.log("active");
-  },
-  deactivated() {
-    console.log("deactive");
-  },
+ 
 };
 </script>
 
