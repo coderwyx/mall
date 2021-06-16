@@ -21,13 +21,16 @@
           :key="index"
           class="center-right-item"
         >
-          <div>{{ item.name }}</div>
-          <div :class="item.isBetter?'betterScore':'lowScore'">{{ item.score }}</div>
+          <div class="score-name">{{ item.name }}</div>
+          <div class="score" :class="item.isBetter ? 'betterScore' : 'lowScore'">
+            {{ item.score }}
+          </div>
           <span v-if="item.isBetter" class="better">高</span>
           <span v-else class="low">低</span>
         </div>
       </div>
     </div>
+    <div class="inShop"><button><a href="https://m.meilishuo.com/">进店逛逛</a></button></div>
   </div>
 </template>
 
@@ -99,22 +102,43 @@ export default {
       .center-right-item {
         display: flex;
         justify-content: space-between;
+        
         margin: 4px 12px;
         font-size: 14px;
+        .score,.score-name {
+          line-height: 20px;
+        }
         .betterScore {
           color: rgb(243, 20, 20);
         }
         .lowScore {
           color: rgb(19, 128, 5);
         }
-        .better{
+        .better {
+          padding: 1px 3px;
           background-color: rgb(243, 20, 20);
           color: #fff;
         }
         .low {
+          padding: 1px 3px;
           background-color: rgb(19, 128, 5);
           color: #fff;
         }
+      } 
+    }
+  }
+  .inShop {
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 3px 0 rgba(1, 1, 1, 0.25);
+    button {
+      border-radius: 15px;
+      height: 35px;
+      width: 160px;
+      border: none;
+      color: rgb(107, 102, 102);
+      a:visited {
+        color: black;
       }
     }
   }

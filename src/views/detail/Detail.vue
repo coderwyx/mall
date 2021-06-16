@@ -1,9 +1,13 @@
 <template>
   <div class="detail">
     <detail-nav-bar></detail-nav-bar>
-    <detail-swiper :topImages="topImages"></detail-swiper>
-    <detail-base-info :baseInfo="goods"></detail-base-info>
-    <detail-shop-info :shopInfo="shop"></detail-shop-info>
+    <scroll class="scroll" :pullUpLoad="true">
+      <detail-swiper :topImages="topImages"></detail-swiper>
+      <detail-base-info :baseInfo="goods"></detail-base-info>
+      <detail-shop-info :shopInfo="shop"></detail-shop-info>
+      <detail-goods-info :detailGoodsInfo="detailGoodsInfo"></detail-goods-info>
+      <detail-params :goodsParams="goodsParams"></detail-params>
+    </scroll>
   </div>
 </template>
 
@@ -12,8 +16,12 @@ import DetailNavBar from "./childComps/DetailNavBar";
 import DetailSwiper from "./childComps/DetailSwiper";
 import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
+import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
+import DetailParams from "./childComps/DetailParams";
 
 import { getDetail, Goods, Shop } from "network/detail";
+
+import Scroll from "components/common/scroll/Scroll";
 
 export default {
   name: "Detail",
@@ -23,10 +31,17 @@ export default {
       topImages: null,
       goods: {},
       shop: {},
+      detailGoodsInfo: {
+        desc: "",
+        detailImage: [],
+      },
+      goodsParams:{}
     };
   },
   methods: {},
   created() {
+    console.log(this.$route);
+    
     this.iid = this.$route.params.iid;
     getDetail(this.iid)
       .then((res) => {
@@ -42,6 +57,11 @@ export default {
         );
         // 获取店铺数据
         this.shop = new Shop(data.shopInfo);
+        // 获取商品详细数据
+        this.detailGoodsInfo.desc = data.detailInfo.desc;
+        this.detailGoodsInfo.detailImage = data.detailInfo.detailImage[0].list;
+        // 获取商品参数数据
+        this.goodsParams = new ShopParams(data.itemParams);
       })
       .catch((err) => {
         console.log(err);
@@ -52,12 +72,29 @@ export default {
     DetailSwiper,
     DetailBaseInfo,
     DetailShopInfo,
+    DetailGoodsInfo,
+    DetailParams,
+    Scroll,
   },
 };
 </script>
 
 <style lang="less" scoped>
+.scroll {
+  position: absolute;
+}
 .detail {
-  height: 2000px;
+  height: 100vh;
+  position: relative;
+  z-index: 101;
+  background-color: white;
+  .scroll {
+    position: absolute;
+    top: 44px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+  }
 }
 </style>

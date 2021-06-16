@@ -1,6 +1,6 @@
 <template>
   <div class="goodsListItem" @click="itemClick">
-    <img :src="goods.show.img" alt="" />
+    <img class="goodsImage" :src="goods.show.img" alt="" />
     <div class="goodsInfo">
       <p>{{ goods.title }}</p>
       <span class="price">{{ goods.price }}</span>
@@ -38,8 +38,9 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
-   img {
+   .goodsImage {
       width: 100%;
+      height: 270px;
       border-radius: 5px;
     }
   .goodsInfo {
