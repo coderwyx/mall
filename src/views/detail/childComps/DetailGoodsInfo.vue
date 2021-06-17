@@ -25,7 +25,8 @@ export default {
 
 <style lang="less" scoped>
  .detailGoodsInfo{
-   padding: 30px 8px;
+   padding: 30px 8px 20px;
+   box-shadow: 0px 3px 0  rgba(1, 1, 1, 0.25);
    .desc {
      font-weight: bold;
    }

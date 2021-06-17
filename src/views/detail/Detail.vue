@@ -7,6 +7,7 @@
       <detail-shop-info :shopInfo="shop"></detail-shop-info>
       <detail-goods-info :detailGoodsInfo="detailGoodsInfo"></detail-goods-info>
       <detail-params :goodsParams="goodsParams"></detail-params>
+      <detail-comment-info :commentInfo="commentInfo"></detail-comment-info>
     </scroll>
   </div>
 </template>
@@ -18,8 +19,9 @@ import DetailBaseInfo from "./childComps/DetailBaseInfo";
 import DetailShopInfo from "./childComps/DetailShopInfo";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParams from "./childComps/DetailParams";
+import DetailCommentInfo from "./childComps/DetailCommentInfo";
 
-import { getDetail, Goods, Shop } from "network/detail";
+import { getDetail, Goods, Shop, ShopParams } from "network/detail";
 
 import Scroll from "components/common/scroll/Scroll";
 
@@ -35,13 +37,19 @@ export default {
         desc: "",
         detailImage: [],
       },
-      goodsParams:{}
+      goodsParams: {},
+      commentInfo:{
+        content:'',
+        user:{
+          avatar:'',
+          uname:''
+        }
+      }
     };
   },
   methods: {},
   created() {
-    console.log(this.$route);
-    
+
     this.iid = this.$route.params.iid;
     getDetail(this.iid)
       .then((res) => {
@@ -62,6 +70,10 @@ export default {
         this.detailGoodsInfo.detailImage = data.detailInfo.detailImage[0].list;
         // 获取商品参数数据
         this.goodsParams = new ShopParams(data.itemParams);
+        // 获取评论数据
+        if(data.rate.list){
+          this.commentInfo = data.rate.list[0]
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -74,6 +86,7 @@ export default {
     DetailShopInfo,
     DetailGoodsInfo,
     DetailParams,
+    DetailCommentInfo,
     Scroll,
   },
 };
