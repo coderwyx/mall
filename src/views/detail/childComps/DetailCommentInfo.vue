@@ -12,7 +12,7 @@
       {{ commentInfo.content }}
     </div>
     <div class="otherInfo">
-      <div>{{ commentInfo.created | dateFmt("YYYY-MM-DD") }}</div>
+      <div  style="width:30%">{{ commentInfo.created*1000 | dateFmt("YYYY-MM-DD") }}</div>
       <div>{{ commentInfo.style }}</div>
     </div>
     <div class="commentInfo-image" v-if="commentInfo.images !== ''">
@@ -24,13 +24,16 @@
       {{ commentInfo.explain }}
     </div>
   </div>
+  <div v-else></div>
 </template>
 
 <script>
 export default {
   name: "DetailCommentInfo",
   data() {
-    return {};
+    return {
+      
+    };
   },
   props: {
     commentInfo: {
@@ -41,7 +44,8 @@ export default {
     },
   },
 
-  methods: {},
+  methods: {
+  },
 };
 </script>
 
@@ -56,7 +60,7 @@ export default {
     border-bottom: 1px #ccc solid;
   }
   .userInfo {
-    margin: 10px 8px;
+    margin: 30px 8px 20px;
     display: flex;
     align-items: center;
     .avatar {

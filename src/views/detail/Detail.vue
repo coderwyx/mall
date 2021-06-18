@@ -1,13 +1,35 @@
 <template>
-  <div class="detail">
-    <detail-nav-bar></detail-nav-bar>
-    <scroll class="scroll" :pullUpLoad="true">
+  <div id="detail" class="detail">
+    <detail-nav-bar @navBarClick="navBarClick" ref="nav"></detail-nav-bar>
+    <scroll
+      ref="scroll"
+      :probeType="3"
+      @scroll="contentScroll"
+      class="scroll"
+      :pullUpLoad="true"
+    >
       <detail-swiper :topImages="topImages"></detail-swiper>
       <detail-base-info :baseInfo="goods"></detail-base-info>
       <detail-shop-info :shopInfo="shop"></detail-shop-info>
-      <detail-goods-info :detailGoodsInfo="detailGoodsInfo"></detail-goods-info>
-      <detail-params :goodsParams="goodsParams"></detail-params>
-      <detail-comment-info :commentInfo="commentInfo"></detail-comment-info>
+      <detail-goods-info
+        @imgLoad="imgLoad"
+        :detailGoodsInfo="detailGoodsInfo"
+      ></detail-goods-info>
+      <detail-params
+        ref="params"
+        id="params"
+        :goodsParams="goodsParams"
+      ></detail-params>
+      <detail-comment-info
+        ref="comment"
+        id="comment"
+        :commentInfo="commentInfo"
+      ></detail-comment-info>
+      <goods-list
+        ref="recommend"
+        id="recomment"
+        :goodsList="recommend"
+      ></goods-list>
     </scroll>
   </div>
 </template>
@@ -20,8 +42,15 @@ import DetailShopInfo from "./childComps/DetailShopInfo";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParams from "./childComps/DetailParams";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
+import GoodsList from "components/content/goods/GoodsList";
 
-import { getDetail, Goods, Shop, ShopParams } from "network/detail";
+import {
+  getDetail,
+  getRecommend,
+  Goods,
+  Shop,
+  ShopParams,
+} from "network/detail";
 
 import Scroll from "components/common/scroll/Scroll";
 
@@ -38,19 +67,75 @@ export default {
         detailImage: [],
       },
       goodsParams: {},
-      commentInfo:{
-        content:'',
-        user:{
-          avatar:'',
-          uname:''
-        }
-      }
+      commentInfo: {
+        content: "",
+        user: {
+          avatar: "",
+          uname: "",
+        },
+      },
+      recommend: [],
+      navBarToY: ["#detail", "", "", ""],
+      navBarTopY: [],
+      currentIndex: 0,
     };
   },
-  methods: {},
-  created() {
+  methods: {
+    contentScroll(position) {
+      const positionY = -position.y;
+      if (
+        this.currentIndex !== 0 &&
+        positionY >= this.navBarTopY[0] &&
+        positionY < this.navBarTopY[1]
+      ) {
+        this.currentIndex = 0;
+        this.$refs.nav.currentIndex = 0;
+      } else if (
+        this.currentIndex !== 1 &&
+        positionY >= this.navBarTopY[1] &&
+        positionY < this.navBarTopY[2]
+      ) {
+        this.currentIndex = 1;
+        this.$refs.nav.currentIndex = 1;
 
+      } else if (
+        this.currentIndex !== 2 &&
+        positionY >= this.navBarTopY[2] &&
+        positionY < this.navBarTopY[3]
+      ) {
+        this.currentIndex = 2;
+        this.$refs.nav.currentIndex = 2;
+
+      } else if (this.currentIndex !== 3 && positionY >= this.navBarTopY[3]) {
+        this.currentIndex = 3;
+        this.$refs.nav.currentIndex = 3;
+
+      }
+    },
+    imgLoad() {
+      console.log("图片加载完了");
+      this.navBarToY[1] = "#params";
+      this.navBarToY[2] = "#comment";
+      this.navBarToY[3] = "#recomment";
+      this.navBarTopY.push(0);
+      this.navBarTopY.push(this.$refs.params.$el.offsetTop);
+      this.navBarTopY.push(this.$refs.comment.$el.offsetTop);
+      this.navBarTopY.push(this.$refs.recommend.$el.offsetTop);
+      console.log(this.navBarTopY);
+    },
+    navBarClick(index) {
+      console.log("点击了");
+      if (this.navBarToY[index] == "") {
+        return;
+      }
+      this.$refs.scroll.scroll.scrollToElement(this.navBarToY[index]);
+
+      // this.$refs.scroll.scrollTo(0,-this.navBarToY[index],500)
+    },
+  },
+  created() {
     this.iid = this.$route.params.iid;
+    //获取商品详情页数据
     getDetail(this.iid)
       .then((res) => {
         console.log(res);
@@ -71,14 +156,25 @@ export default {
         // 获取商品参数数据
         this.goodsParams = new ShopParams(data.itemParams);
         // 获取评论数据
-        if(data.rate.list){
-          this.commentInfo = data.rate.list[0]
+        if (data.rate.list) {
+          this.commentInfo = data.rate.list[0];
         }
       })
       .catch((err) => {
         console.log(err);
       });
+
+    // 获取详情页推荐数据
+    getRecommend()
+      .then((res) => {
+        console.log(res);
+        this.recommend = res.data.list;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
+
   components: {
     DetailNavBar,
     DetailSwiper,
@@ -87,6 +183,7 @@ export default {
     DetailGoodsInfo,
     DetailParams,
     DetailCommentInfo,
+    GoodsList,
     Scroll,
   },
 };

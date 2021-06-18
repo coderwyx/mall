@@ -1,6 +1,7 @@
 <template>
   <div class="goodsListItem" @click="itemClick">
-    <img class="goodsImage" :src="goods.show.img" alt="" />
+    <img  class="goodsImage" v-if="goods.image" :src="goods.image" alt="">
+    <img v-else class="goodsImage" :src="goods.show.img" alt="" />
     <div class="goodsInfo">
       <p>{{ goods.title }}</p>
       <span class="price">{{ goods.price }}</span>
@@ -17,10 +18,13 @@ export default {
   },
   methods: {
     itemClick(){
+      if (this.goods.show) {
+        this.$router.push('/detail/'+this.goods.iid)
+      }
       
-      this.$router.push('/detail/'+this.goods.iid)
-      
-    }
+
+    },
+   
   },
   props: {
     goods: {
