@@ -1,7 +1,7 @@
 <template>
   <div class="cart"> 
     <cart-nav-bar></cart-nav-bar>
-    <scroll  class="scroll">
+    <scroll ref="scroll"  class="scroll">
     <cart-list></cart-list>
     </scroll>
   </div>
@@ -25,6 +25,11 @@ export default {
      CartList,
      Scroll
    },
+   activated () {
+    //  console.log();
+    //  this.$refs.scroll
+     this.$refs.scroll.scroll.refresh()
+   }
   
 }
 </script>
@@ -33,6 +38,10 @@ export default {
 .cart{
   height: 100vh;
   width: 100%;
+  position: relative;
+  left: 0;
+  top: 0;
+  right: 0;
 }
 .scroll{
   position: absolute;
