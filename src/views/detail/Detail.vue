@@ -1,36 +1,52 @@
 <template>
   <div id="detail" class="detail">
+    <!-- 顶部导航栏 -->
     <detail-nav-bar @navBarClick="navBarClick" ref="nav"></detail-nav-bar>
+    <!-- 滑动模块 -->
     <scroll
       ref="scroll"
       :probeType="3"
       @scroll="contentScroll"
       class="scroll"
-      :pullUpLoad="true"
+      
     >
+      <!-- 轮播图组件 -->
       <detail-swiper :topImages="topImages"></detail-swiper>
+      <!-- 基础信息组件 -->
       <detail-base-info :baseInfo="goods"></detail-base-info>
+      <!-- 店铺信息组件 -->
       <detail-shop-info :shopInfo="shop"></detail-shop-info>
+      <!-- 商品详细信息组件 -->
       <detail-goods-info
         @imgLoad="imgLoad"
         :detailGoodsInfo="detailGoodsInfo"
       ></detail-goods-info>
+      <!-- 商品参数组件 -->
       <detail-params
         ref="params"
         id="params"
         :goodsParams="goodsParams"
       ></detail-params>
+      <!-- 商品评论信息组件 -->
       <detail-comment-info
         ref="comment"
         id="comment"
         :commentInfo="commentInfo"
       ></detail-comment-info>
+      <!-- 推荐商品组件 -->
       <goods-list
         ref="recommend"
         id="recomment"
         :goodsList="recommend"
       ></goods-list>
     </scroll>
+    <!-- 返回顶部按钮模块 -->
+    <back-top
+      @click.native="backClick"
+      class="back-top"
+      v-show="showBackTop"
+    ></back-top>
+    <detail-tab-bar @addCart="addCart"></detail-tab-bar>
   </div>
 </template>
 
@@ -42,6 +58,8 @@ import DetailShopInfo from "./childComps/DetailShopInfo";
 import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParams from "./childComps/DetailParams";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
+import DetailTabBar from "./childComps/DetailTabBar";
+import BackTop from "components/content/backtop/BackTop";
 import GoodsList from "components/content/goods/GoodsList";
 
 import {
@@ -78,11 +96,18 @@ export default {
       navBarToY: ["#detail", "", "", ""],
       navBarTopY: [],
       currentIndex: 0,
+      showBackTop: false,
     };
   },
   methods: {
+    backClick() {
+      this.$refs.scroll.scrollTo(0, 0);
+    },
     contentScroll(position) {
+
       const positionY = -position.y;
+      this.showBackTop = positionY > 1000;
+
       if (
         this.currentIndex !== 0 &&
         positionY >= this.navBarTopY[0] &&
@@ -97,7 +122,6 @@ export default {
       ) {
         this.currentIndex = 1;
         this.$refs.nav.currentIndex = 1;
-
       } else if (
         this.currentIndex !== 2 &&
         positionY >= this.navBarTopY[2] &&
@@ -105,15 +129,13 @@ export default {
       ) {
         this.currentIndex = 2;
         this.$refs.nav.currentIndex = 2;
-
       } else if (this.currentIndex !== 3 && positionY >= this.navBarTopY[3]) {
         this.currentIndex = 3;
         this.$refs.nav.currentIndex = 3;
-
       }
     },
     imgLoad() {
-      console.log("图片加载完了");
+      // console.log("图片加载完了"); 图片加载完之后获取高度和可以点击跳转
       this.navBarToY[1] = "#params";
       this.navBarToY[2] = "#comment";
       this.navBarToY[3] = "#recomment";
@@ -121,7 +143,6 @@ export default {
       this.navBarTopY.push(this.$refs.params.$el.offsetTop);
       this.navBarTopY.push(this.$refs.comment.$el.offsetTop);
       this.navBarTopY.push(this.$refs.recommend.$el.offsetTop);
-      console.log(this.navBarTopY);
     },
     navBarClick(index) {
       console.log("点击了");
@@ -132,13 +153,27 @@ export default {
 
       // this.$refs.scroll.scrollTo(0,-this.navBarToY[index],500)
     },
+    addCart(){
+      console.log("加入购物车");
+      // 获取购物车需要展示的信息
+      const product = {}
+      product.image = this.topImages[0]
+      product.title = this.goods.title
+      product.desc = this.goods.desc
+      product.price = this. goods.realPrice
+      product.iid = this.iid
+      
+      // 将商品添加到购物车
+      // this.$store.commit('addCart',product) --> mutations调用
+
+      this.$store.dispatch('addCart', product)
+    }
   },
   created() {
     this.iid = this.$route.params.iid;
     //获取商品详情页数据
     getDetail(this.iid)
       .then((res) => {
-        console.log(res);
         const data = res.result;
         //获取详情页轮播图数据
         this.topImages = data.itemInfo.topImages;
@@ -167,7 +202,6 @@ export default {
     // 获取详情页推荐数据
     getRecommend()
       .then((res) => {
-        console.log(res);
         this.recommend = res.data.list;
       })
       .catch((err) => {
@@ -183,16 +217,16 @@ export default {
     DetailGoodsInfo,
     DetailParams,
     DetailCommentInfo,
+    DetailTabBar,
     GoodsList,
+    BackTop,
     Scroll,
   },
 };
 </script>
 
 <style lang="less" scoped>
-.scroll {
-  position: absolute;
-}
+
 .detail {
   height: 100vh;
   position: relative;
@@ -203,7 +237,7 @@ export default {
     top: 44px;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 49px;
     overflow: hidden;
   }
 }

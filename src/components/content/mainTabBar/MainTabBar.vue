@@ -1,7 +1,7 @@
 <template>
   <tab-bar>
     <tab-bar-item path="/home" activeColor="#ff8198">
-      <span slot="item-icon" class="iconfont icon-zhuye"></span>
+      <span slot="item-icon" class="iconfont icon-index"></span>
       <div slot="item-text">主页</div>
     </tab-bar-item>
     <tab-bar-item path="/category" activeColor="#ff8198">
@@ -9,7 +9,7 @@
       <div slot="item-text">分类</div>
     </tab-bar-item>
     <tab-bar-item path="/cart" activeColor="#ff8198">
-      <span slot="item-icon" class="iconfont icon-che1"></span>
+      <span slot="item-icon" class="iconfont icon-qicheqianlian-select"></span>
       <div slot="item-text">购物车</div>
     </tab-bar-item>
     <tab-bar-item path="/profile" activeColor="#ff8198">

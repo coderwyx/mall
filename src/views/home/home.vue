@@ -27,7 +27,7 @@
       :probe-type="3"
       @scroll="contentScroll"
       @pullingUp="loadMore"
-      :pullUpLoad="true"
+      
     >
       <!-- 轮播图组件 -->
       <home-swiper

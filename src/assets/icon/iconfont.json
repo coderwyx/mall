@@ -1,33 +1,54 @@
 {
-  "id": "2585006",
-  "name": "complate-tabbar",
+  "id": "2620260",
+  "name": "mall",
   "font_family": "iconfont",
   "css_prefix_text": "icon-",
   "description": "",
   "glyphs": [
     {
-      "icon_id": "13623373",
-      "name": "我 的",
-      "font_class": "wode",
-      "unicode": "e600",
-      "unicode_decimal": 58880
-    },
-    {
-      "icon_id": "18555537",
-      "name": "主页",
-      "font_class": "zhuye",
-      "unicode": "e682",
-      "unicode_decimal": 59010
-    },
-    {
-      "icon_id": "18916007",
-      "name": "购物车",
-      "font_class": "che1",
+      "icon_id": "3223129",
+      "name": "客服 服务 电话",
+      "font_class": "tubiaozhizuo--",
       "unicode": "e601",
       "unicode_decimal": 58881
     },
     {
-      "icon_id": "21097279",
+      "icon_id": "4350546",
+      "name": "主页",
+      "font_class": "index",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "6696886",
+      "name": "店铺",
+      "font_class": "dianpu",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "9569629",
+      "name": "我 的",
+      "font_class": "wode",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "14499213",
+      "name": "收 藏",
+      "font_class": "shoucang",
+      "unicode": "e9ee",
+      "unicode_decimal": 59886
+    },
+    {
+      "icon_id": "19013214",
+      "name": "购物车",
+      "font_class": "qicheqianlian-select",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "21835701",
       "name": "分类",
       "font_class": "category",
       "unicode": "e602",

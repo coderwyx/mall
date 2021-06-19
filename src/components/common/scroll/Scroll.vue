@@ -21,10 +21,10 @@ export default {
       type: Number,
       default: 0,
     },
-    pullUpLoad: {
-      type: Boolean,
-      default: false,
-    },
+    // pullUpLoad: {
+    //   type: Boolean,
+    //   default: false,
+    // },
   },
   methods: {
     scrollTo(x, y, time = 500) {
@@ -40,7 +40,7 @@ export default {
       observeDOM: true,
       observeImage:true,
       probeType: this.probeType,
-      pullUpLoad: this.pullUpLoad,
+      pullUpLoad: true,
     })),
       this.scroll.on("scroll", (position) => {
         this.$emit("scroll", position);

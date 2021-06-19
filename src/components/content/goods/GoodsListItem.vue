@@ -49,8 +49,6 @@ export default {
     }
   .goodsInfo {
     height: 60px;
-
-   
     p {
       word-break: keep-all;
       white-space: nowrap;
