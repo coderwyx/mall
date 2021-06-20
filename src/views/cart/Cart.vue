@@ -42,6 +42,7 @@ export default {
   left: 0;
   top: 0;
   right: 0;
+  background-color: #f6f6f6;
 }
 .scroll{
   position: absolute;

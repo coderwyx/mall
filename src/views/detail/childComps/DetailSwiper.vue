@@ -43,7 +43,7 @@ export default {
 }
 .topImages{
   /* margin-top: -10px; */
-  height: 495px !important;
+  height: 495px ;
   width: 100%;
 }
 </style>
