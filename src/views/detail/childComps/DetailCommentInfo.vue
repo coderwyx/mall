@@ -15,7 +15,7 @@
       <div  style="width:30%">{{ commentInfo.created*1000 | dateFmt("YYYY-MM-DD") }}</div>
       <div>{{ commentInfo.style }}</div>
     </div>
-    <div class="commentInfo-image" v-if="commentInfo.images !== ''">
+    <div class="commentInfo-image" v-if="commentInfo.images !== undefined">
       <div v-for="(item, index) in commentInfo.images" :key="index">
         <img class="userGoodsImage" :src="item" alt="" />
       </div>
@@ -63,6 +63,7 @@ export default {
     margin: 30px 8px 20px;
     display: flex;
     align-items: center;
+    
     .avatar {
       height: 50px;
       width: 50px;
@@ -79,9 +80,11 @@ export default {
     line-height: 20px;
   }
   .otherInfo {
+    margin: 14px 8px;
     display: flex;
+    justify-content: space-between;
+  
     div {
-      margin: 10px 6px;
       color: rgb(92, 91, 91);
       font-size: 14px;
     }
@@ -89,10 +92,16 @@ export default {
   .commentInfo-image {
     display: flex;
     margin: 4px;
+    height: 85px;
+    overflow: hidden;
     .userGoodsImage {
       margin: 0 2px;
-      height: 75px;
-      width: 75px;
+      height: 112px;
+      width: 85px;
+      position: relative;
+      top: -25px;
+      left: 0;
+      right: 0;
     }
   }
   .explain {

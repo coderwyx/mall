@@ -47,7 +47,7 @@ export default {
 .DetailBaseInfo {
   
   .title {
-    margin: 8px;
+    margin: 8px 8px 4px;
     font-size: 16px;
     font-weight: bold;
   }

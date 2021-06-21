@@ -59,7 +59,7 @@ import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParams from "./childComps/DetailParams";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
 import DetailTabBar from "./childComps/DetailTabBar";
-import BackTop from "components/content/backtop/BackTop";
+import BackTop from "components/content/backTop/BackTop";
 import GoodsList from "components/content/goods/GoodsList";
 
 import {

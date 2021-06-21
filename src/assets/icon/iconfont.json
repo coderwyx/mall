@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "1549087",
+      "name": "多选框",
+      "font_class": "duoxuankuang1",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "1190965",
+      "name": "多选框",
+      "font_class": "mg-checkbox",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
       "icon_id": "3223129",
       "name": "客服 服务 电话",
       "font_class": "tubiaozhizuo--",

@@ -62,11 +62,11 @@ import HomeSwiper from "./childComps/HomeSwiper";
 import HomeRecommendView from "./childComps/HomeRecommendView";
 import HomeFeatureView from "./childComps/HomeFeatureView";
 
-import NavBar from "components/common/navbar/NavBar";
-import TabControl from "components/content/tabcontrol/TabControl";
+import NavBar from "components/common/navBar/NavBar";
+import TabControl from "components/content/tabControl/TabControl";
 import GoodsList from "components/content/goods/GoodsList";
 import Scroll from "components/common/scroll/Scroll";
-import BackTop from "components/content/backtop/BackTop";
+import BackTop from "components/content/backTop/BackTop";
 
 import { getHomeMulitidata, getHomeGoods } from "network/home";
 

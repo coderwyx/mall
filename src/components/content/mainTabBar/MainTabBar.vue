@@ -1,5 +1,5 @@
 <template>
-  <tab-bar>
+  <tab-bar class="tabBar">
     <tab-bar-item path="/home" activeColor="#ff8198">
       <span slot="item-icon" class="iconfont icon-index"></span>
       <div slot="item-text">主页</div>
@@ -21,8 +21,8 @@
 </template>
 
 <script>
-  import TabBar from 'components/common/tabbar/TabBar'
-  import TabBarItem from 'components/common/tabbar/TabBarItem'
+  import TabBar from 'components/common/tabBar/TabBar'
+  import TabBarItem from 'components/common/tabBar/TabBarItem'
   export default {
     name: "MainTabBar",
     data() {
@@ -37,5 +37,7 @@
 </script>
 
 <style>
-
+ .tab-bar-item{
+   background-color: #fff;
+ }
 </style>

@@ -4,7 +4,7 @@
      
       :autoplay="3000"
       indicator-color="white"
-      height="495"
+      height="490"
     >
       <van-swipe-item v-for="(item, index) in topImages" :key="index"  class="my-swipe">
         <img :src="item" alt="" class="topImages" />
@@ -43,7 +43,7 @@ export default {
 }
 .topImages{
   /* margin-top: -10px; */
-  height: 495px ;
+  height: 490px ;
   width: 100%;
 }
 </style>

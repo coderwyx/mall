@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import MainTabBar from 'components/content/maintabbar/MainTabBar';
+  import MainTabBar from 'components/content/mainTabBar/MainTabBar';
   
 
 export default {

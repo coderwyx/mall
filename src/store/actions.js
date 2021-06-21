@@ -6,6 +6,8 @@ export default {
       context.commit('addCounter', oldProduct)
     } else {
       payload.count = 1
+      payload.isCheck = true
+
       context.commit('addToCart', payload)
     }
   }

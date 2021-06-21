@@ -1,8 +1,8 @@
 <template>
   <div class="cartListItem">
-    <!-- <div>
-      <CheckButton></CheckButton>
-    </div> -->
+    <div class="checkButton" @click="checkItem">
+      <check-button :isCheck="product.isCheck"></check-button>
+    </div>
     <div class="itemImg"><img :src="product.image" alt="" /></div>
 
     <div class="itemInfo">
@@ -25,10 +25,14 @@
 </template>
 
 <script>
+import CheckButton from 'components/content/checkButton/CheckButton'
+
 export default {
   name: "CartListItem",
   data() {
-    return {};
+    return {
+     
+    };
   },
   props: {
     product: {
@@ -38,7 +42,14 @@ export default {
       },
     },
   },
-  methods: {},
+  methods: {
+    checkItem(){
+      this.$store.commit('changeCheck',this.product)
+    }
+  },
+  components: {
+    CheckButton
+  }
 };
 </script>
 
@@ -47,12 +58,19 @@ export default {
   display: flex;
   background-color: #fff;
   margin: 8px 0px;
+  align-items: center;
+  .checkButton{
+    color: #ff8198;
+    width: 20px;
+    margin-left: 6px;
+
+  }
   .itemImg {
     margin: 5px 8px;
     height: 90px;
     width: 90px;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 8px;
     img {
       height: 140px;
       width: 100%;

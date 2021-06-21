@@ -1,9 +1,16 @@
 <template>
   <div class="cart"> 
+    <!-- 导航 -->
     <cart-nav-bar></cart-nav-bar>
+
     <scroll ref="scroll"  class="scroll">
+    <!-- 购物车列表 -->
     <cart-list></cart-list>
+
     </scroll>
+
+    <!-- 汇总 -->
+    <cart-bottom-bar></cart-bottom-bar>
   </div>
 
 </template>
@@ -11,6 +18,7 @@
 <script>
 import CartNavBar from './childComps/CartNavBar'
 import CartList from './childComps/CartList'
+import CartBottomBar from './childComps/CartBottomBar'
 
 import Scroll from 'components/common/scroll/Scroll'
 
@@ -23,6 +31,7 @@ export default {
    components: {
      CartNavBar,
      CartList,
+     CartBottomBar,
      Scroll
    },
    activated () {
@@ -49,7 +58,7 @@ export default {
   top: 44px;
   left: 0;
   right: 0;
-  bottom: 49px;
+  bottom: 89px;
   overflow: hidden;
 }
 </style>
