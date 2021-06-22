@@ -21,6 +21,14 @@ export default {
       type: Number,
       default: 0,
     },
+    pulldown: {
+      type: Boolean,
+      default: true,
+    },
+    pullup: {
+      type: Boolean,
+      default: true,
+    },
     // pullUpLoad: {
     //   type: Boolean,
     //   default: false,
@@ -38,9 +46,11 @@ export default {
     (this.scroll = BScroll(this.$refs.wrapper, {
       click: true,
       observeDOM: true,
-      observeImage:true,
+      observeImage: true,
       probeType: this.probeType,
       pullUpLoad: true,
+      pulldown:this.pulldown,
+      pullup:this.pullup,
     })),
       this.scroll.on("scroll", (position) => {
         this.$emit("scroll", position);
@@ -48,6 +58,7 @@ export default {
       this.scroll.on("pullingUp", () => {
         this.$emit("pullingUp");
       });
+      
   },
 };
 </script>

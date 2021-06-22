@@ -48,6 +48,7 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
+  margin-top: 50px;
   .nothingImg {
     margin: 10px;
     height: 120px;

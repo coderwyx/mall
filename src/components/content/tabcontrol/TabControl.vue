@@ -1,6 +1,11 @@
 <template>
   <div class="tab-control">
-    <div v-for="(item, index) in titles" :key="index" :class="{active: index === currentIndex}" @click="itemClick(index)">
+    <div
+      v-for="(item, index) in titles"
+      :key="index"
+      :class="{ active: index === currentIndex }"
+      @click="itemClick(index)"
+    >
       <span>{{ item }}</span>
     </div>
   </div>
@@ -11,14 +16,14 @@ export default {
   name: "TabControl",
   data() {
     return {
-      currentIndex:0
+      currentIndex: 0,
     };
   },
   methods: {
-    itemClick(index){
+    itemClick(index) {
       this.currentIndex = index;
-      this.$emit('tabClick',index)
-    }
+      this.$emit("tabClick", index);
+    },
   },
   props: {
     titles: {
@@ -36,14 +41,14 @@ export default {
   display: flex;
   background-color: #fff;
 
-    div {
-      flex-grow: 1;
-      text-align: center;
-      padding: 10px;
-      span {
-        padding: 5px;
-      }
+  div {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    span {
+      padding: 5px;
     }
+  }
 }
 .active {
   color: #ff8198;
