@@ -10,7 +10,7 @@
       <div class="amount">{{ totalPrice }}</div>
     </div>
 
-    <div class="inputOrder">提交订单({{ totalCheck }})</div>
+    <div class="inputOrder" @click="inputOrder">提交订单({{ totalCheck }})</div>
   </div>
 </template>
 
@@ -28,6 +28,14 @@ export default {
         this.$store.commit('cancelAllCheck',this.$store.getters.cartList)
       }else{
         this.$store.commit('allCheck',this.$store.getters.cartList)
+      }
+    },
+    inputOrder(){
+      if(this.totalCheck===0){
+        this.$toast('请选择商品后再提交订单');
+      }else{
+        this.$toast('订单提交成功');
+        
       }
     }
   },

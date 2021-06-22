@@ -3,13 +3,7 @@
     <!-- 顶部导航栏 -->
     <detail-nav-bar @navBarClick="navBarClick" ref="nav"></detail-nav-bar>
     <!-- 滑动模块 -->
-    <scroll
-      ref="scroll"
-      :probeType="3"
-      @scroll="contentScroll"
-      class="scroll"
-      
-    >
+    <scroll ref="scroll" :probeType="3" @scroll="contentScroll" class="scroll">
       <!-- 轮播图组件 -->
       <detail-swiper :topImages="topImages"></detail-swiper>
       <!-- 基础信息组件 -->
@@ -46,7 +40,7 @@
       class="back-top"
       v-show="showBackTop"
     ></back-top>
-    <detail-tab-bar @addCart="addCart"></detail-tab-bar>
+    <detail-tab-bar @addCart="doAddCart"></detail-tab-bar>
   </div>
 </template>
 
@@ -59,9 +53,11 @@ import DetailGoodsInfo from "./childComps/DetailGoodsInfo";
 import DetailParams from "./childComps/DetailParams";
 import DetailCommentInfo from "./childComps/DetailCommentInfo";
 import DetailTabBar from "./childComps/DetailTabBar";
+
 import BackTop from "components/content/backTop/BackTop";
 import GoodsList from "components/content/goods/GoodsList";
 
+import { mapActions } from "vuex";
 import {
   getDetail,
   getRecommend,
@@ -97,14 +93,16 @@ export default {
       navBarTopY: [],
       currentIndex: 0,
       showBackTop: false,
+      message:'',
+      show:false
     };
   },
   methods: {
+    ...mapActions(['addCart']),
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
     contentScroll(position) {
-
       const positionY = -position.y;
       this.showBackTop = positionY > 1000;
 
@@ -153,21 +151,26 @@ export default {
 
       // this.$refs.scroll.scrollTo(0,-this.navBarToY[index],500)
     },
-    addCart(){
-      console.log("加入购物车");
+    doAddCart() {
       // 获取购物车需要展示的信息
-      const product = {}
-      product.image = this.topImages[0]
-      product.title = this.goods.title
-      product.desc = this.goods.desc
-      product.price = this. goods.realPrice
-      product.iid = this.iid
-      
+      const product = {};
+      product.image = this.topImages[0];
+      product.title = this.goods.title;
+      product.desc = this.goods.desc;
+      product.price = this.goods.realPrice;
+      product.iid = this.iid;
+
       // 将商品添加到购物车
       // this.$store.commit('addCart',product) --> mutations调用
 
-      this.$store.dispatch('addCart', product)
-    }
+      this.addCart(product).then((res) => {
+        this.$toast(res)
+
+        setTimeout(() => {
+         this.$toast.clear
+        }, 1500);
+      });
+    },
   },
   created() {
     this.iid = this.$route.params.iid;
@@ -226,7 +229,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 .detail {
   height: 100vh;
   position: relative;

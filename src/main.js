@@ -7,7 +7,11 @@ import router from './router'
 import store from './store'
 import less from 'less'
 import moment from 'moment'
+import VueLazyload from 'vue-lazyload'
+import { Toast } from 'vant';
 
+Vue.use(VueLazyload)
+Vue.use(Toast);
 Vue.filter('dateFmt', (input, formatString = 'YYYY-MM-DD HH:mm:ss') => {
   //es5函数参数设置默认值
   //const lastFormatString = formatString || ''
