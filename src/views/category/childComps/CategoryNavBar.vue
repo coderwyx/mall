@@ -1,7 +1,7 @@
 <template>
   <div>
     <NavBar class="CategoryNavBar">
-      <span slot="center">商品分类</span>
+      <span class="title" slot="center">商品分类</span>
     </NavBar>
   </div>
 </template>
@@ -22,12 +22,18 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .CategoryNavBar{
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background-color: #ff8198;
+  .title{
+   
+   color: #fff;
+   font-weight: bold;
+   letter-spacing: 1px;
+  }
 }
 </style>

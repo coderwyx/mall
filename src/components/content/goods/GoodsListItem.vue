@@ -1,10 +1,11 @@
 <template>
   <div class="goodsListItem" @click="itemClick">
     <img  class="goodsImage" v-if="goods.image" :src="goods.image" alt="">
-    <img v-else class="goodsImage" v-lazy="goods.show.img" alt="" />
+    <img v-else-if="goods.show" class="goodsImage" v-lazy="goods.show.img" alt="" />
+    <img v-else class="categoryGoodsImg" :src="goods.img" alt="">
     <div class="goodsInfo">
       <p>{{ goods.title }}</p>
-      <span class="price">{{ goods.price }}</span>
+      <span class="price">¥{{ goods.price }}</span>
       <span class="cfav">★{{ goods.cfav }}</span>
     </div>
   </div>
@@ -21,7 +22,9 @@ export default {
       if (this.goods.show) {
         this.$router.push('/detail/'+this.goods.iid)
       }
-      
+     if (this.goods.img) {
+       this.$router.push('/detail/'+this.goods.iid)
+     }
 
     },
    
@@ -45,6 +48,11 @@ export default {
    .goodsImage {
       width: 100%;
       height: 270px;
+      border-radius: 5px;
+    }
+    .categoryGoodsImg{
+       width: 100%;
+      height: 200px;
       border-radius: 5px;
     }
   .goodsInfo {

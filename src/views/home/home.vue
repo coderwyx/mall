@@ -2,7 +2,7 @@
   <div id="home">
     <!-- 顶部导航栏组件 -->
     <nav-bar class="home-nav">
-      <div slot="center">购物街</div>
+      <div class="title" slot="center">购物街</div>
     </nav-bar>
 
     <tab-control
@@ -27,7 +27,6 @@
       :probe-type="3"
       @scroll="contentScroll"
       @pullingUp="loadMore"
-      
     >
       <!-- 轮播图组件 -->
       <home-swiper
@@ -238,19 +237,24 @@ export default {
     this.getHomeGoods("sell");
   },
   mounted() {},
- 
 };
 </script>
 
 <style lang="less">
 #home {
   position: relative;
+  font-size: 16px;
   height: 100vh;
   .home-nav {
     background-color: #ff8198;
     position: sticky;
     top: -1px;
     z-index: 100;
+    .title {
+      color: #fff;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
   }
   .scroll {
     position: absolute;

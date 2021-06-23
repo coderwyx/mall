@@ -93,12 +93,12 @@ export default {
       navBarTopY: [],
       currentIndex: 0,
       showBackTop: false,
-      message:'',
-      show:false
+      message: "",
+      show: false,
     };
   },
   methods: {
-    ...mapActions(['addCart']),
+    ...mapActions(["addCart"]),
     backClick() {
       this.$refs.scroll.scrollTo(0, 0);
     },
@@ -164,10 +164,10 @@ export default {
       // this.$store.commit('addCart',product) --> mutations调用
 
       this.addCart(product).then((res) => {
-        this.$toast(res)
+        this.$toast(res);
 
         setTimeout(() => {
-         this.$toast.clear
+          this.$toast.clear;
         }, 1500);
       });
     },
@@ -234,6 +234,8 @@ export default {
   position: relative;
   z-index: 101;
   background-color: white;
+  font-size: 16px;
+
   .scroll {
     position: absolute;
     top: 44px;

@@ -1,7 +1,7 @@
 <template>
   <div>
     <nav-bar class="cartNavBar">
-      <div slot="center">购物车({{ cartLength }})</div>
+      <div class="title" slot="center">购物车({{ cartLength }})</div>
     </nav-bar>
   </div>
 </template>
@@ -25,12 +25,17 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
 .cartNavBar {
   position: fixed;
   left: 0;
   right: 0;
   top: 0;
   background-color: #ff8198;
+  .title {
+    color: #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
 }
 </style>
