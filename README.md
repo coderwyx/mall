@@ -27,6 +27,6 @@
 ### 我的：
 ![image](https://user-images.githubusercontent.com/85338646/123247952-f36f7a00-d519-11eb-9c53-9a274caac563.png)
 
-### 觉得这个项目不错的小伙伴可以点个star一起学习
+### 觉得这个项目还不错的小伙伴可以用您的发财小手点个star一起学习！！！
 
 
