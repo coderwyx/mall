@@ -6,6 +6,55 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "20099824",
+      "name": "购物 车",
+      "font_class": "cart-small2",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "21496938",
+      "name": "下载APP",
+      "font_class": "xiazaiAPP",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "5178522",
+      "name": "皇冠",
+      "font_class": "huangguan",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "6207521",
+      "name": "积分商城",
+      "font_class": "jifenshangcheng1",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "21972015",
+      "name": "我的信息",
+      "font_class": "wodexinxi",
+      "unicode": "e707",
+      "unicode_decimal": 59143
+    },
+    {
+      "icon_id": "21332599",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "4447073",
+      "name": "手机",
+      "font_class": "shouji",
+      "unicode": "e8ff",
+      "unicode_decimal": 59647
+    },
+    {
       "icon_id": "1549087",
       "name": "多选框",
       "font_class": "duoxuankuang1",

@@ -1,8 +1,13 @@
 <template>
   <div class="goodsListItem" @click="itemClick">
-    <img  class="goodsImage" v-if="goods.image" :src="goods.image" alt="">
-    <img v-else-if="goods.show" class="goodsImage" v-lazy="goods.show.img" alt="" />
-    <img v-else class="categoryGoodsImg" :src="goods.img" alt="">
+    <img class="goodsImage" v-if="goods.image" :src="goods.image" alt="" />
+    <img
+      v-else-if="goods.show"
+      class="goodsImage"
+      v-lazy="goods.show.img"
+      alt=""
+    />
+    <img v-else class="categoryGoodsImg" :src="goods.img" alt="" />
     <div class="goodsInfo">
       <p>{{ goods.title }}</p>
       <span class="price">¥{{ goods.price }}</span>
@@ -18,16 +23,12 @@ export default {
     return {};
   },
   methods: {
-    itemClick(){
-      if (this.goods.show) {
-        this.$router.push('/detail/'+this.goods.iid)
+    itemClick() {
+      if (this.goods.show || this.goods.img) {
+        this.$router.push("/detail/" + this.goods.iid);
       }
-     if (this.goods.img) {
-       this.$router.push('/detail/'+this.goods.iid)
-     }
-
+     
     },
-   
   },
   props: {
     goods: {
@@ -45,16 +46,16 @@ export default {
   display: flex;
   flex-direction: column;
   text-align: center;
-   .goodsImage {
-      width: 100%;
-      height: 270px;
-      border-radius: 5px;
-    }
-    .categoryGoodsImg{
-       width: 100%;
-      height: 200px;
-      border-radius: 5px;
-    }
+  .goodsImage {
+    width: 100%;
+    height: 270px;
+    border-radius: 5px;
+  }
+  .categoryGoodsImg {
+    width: 100%;
+    height: 200px;
+    border-radius: 5px;
+  }
   .goodsInfo {
     height: 60px;
     p {
@@ -70,7 +71,6 @@ export default {
     }
     .cfav {
       margin: 8px;
-      
     }
   }
 }

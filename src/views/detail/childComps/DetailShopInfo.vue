@@ -22,7 +22,10 @@
           class="center-right-item"
         >
           <div class="score-name">{{ item.name }}</div>
-          <div class="score" :class="item.isBetter ? 'betterScore' : 'lowScore'">
+          <div
+            class="score"
+            :class="item.isBetter ? 'betterScore' : 'lowScore'"
+          >
             {{ item.score }}
           </div>
           <span v-if="item.isBetter" class="better">高</span>
@@ -30,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div class="inShop"><button><a href="https://m.meilishuo.com/">进店逛逛</a></button></div>
+    <div class="inShop"><a href="https://m.meilishuo.com/">进店逛逛</a></div>
   </div>
 </template>
 
@@ -102,10 +105,11 @@ export default {
       .center-right-item {
         display: flex;
         justify-content: space-between;
-        
+
         margin: 4px 12px;
         font-size: 14px;
-        .score,.score-name {
+        .score,
+        .score-name {
           line-height: 20px;
         }
         .betterScore {
@@ -124,22 +128,19 @@ export default {
           background-color: rgb(19, 128, 5);
           color: #fff;
         }
-      } 
+      }
     }
   }
   .inShop {
-    padding: 30px;
+    padding: 30px 30px 40px;
     text-align: center;
     box-shadow: 0 3px 0 rgba(1, 1, 1, 0.25);
-    button {
-      border-radius: 15px;
-      height: 35px;
-      width: 160px;
-      border: none;
-      color: rgb(107, 102, 102);
-      a:visited {
-        color: black;
-      }
+    
+    a{
+      background-color: #f2f5f8;
+      color: #666666;
+      padding: 10px 45px;
+      border-radius: 20px;
     }
   }
 }
