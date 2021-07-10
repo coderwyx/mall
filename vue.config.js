@@ -20,5 +20,7 @@ module.exports = {
       preProcessor: 'less',
       patterns: [path.resolve(__dirname, './src/assets/css/base.less')] // less所在文件路径
     }
-  }
+  },
+
+
 }
