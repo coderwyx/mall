@@ -47,6 +47,5 @@ export class ShopParams {
     this.set = itemParams.info.set;
     this.rule = itemParams.rule.tables;
     this.disclaimer = itemParams.rule.disclaimer;
-    this.test = 'aaa';
   }
 }

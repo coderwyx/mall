@@ -173,6 +173,8 @@ export default {
     },
   },
   created() {
+    console.log(this.$route);
+
     this.iid = this.$route.params.iid;
     //获取商品详情页数据
     getDetail(this.iid)
